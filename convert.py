@@ -1,9 +1,9 @@
 def main():
-    text = input("Input your text: ")
-    if ":)" in text:
-        text = text.replace(":)", "🙂")
-    if ":(" in text:
-        text = text.replace(":(", "🙁")
+    text = convert(input("Input your text: "))
     print(text)
+
+def convert(string):
+    string = string.replace(":)", "🙂").replace(":(", "🙁")
+    return string
 
 main()
