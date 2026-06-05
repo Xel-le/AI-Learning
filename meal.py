@@ -17,7 +17,7 @@ def main():
     elif 18 <= timeInput <= 19:
         print("dinner time")
 
-def convert(time, format):
+def convert(time, format="24"):
         whole, decimal = time.split(":", 1)
         decimal = float(decimal) / 60
         time = float(whole) + float(decimal)
