@@ -13,8 +13,7 @@ def main():
         elif ext.endswith("txt"):
                 print("text/plain")
         elif ext.endswith("zip"):
-                operatingSystem = str(input("What's your OS? ")).strip().lower()
-                print("application/x-zip-compressed") if operatingSystem == "windows" or operatingSystem == "win" else print("application/zip")
+                print("application/zip")
         else:
                 print("application/octet-stream")
             
