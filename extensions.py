@@ -1,27 +1,24 @@
 def main():
-    # No .lower() here since file extensions must always be lowercase
-    file = str(input("File: ")).strip()
-    _, extension = file.split(".", 1)
+    file = str(input("File: ")).strip().lower()
 
     def mediaType(ext):
-        match ext:
-            case "jpeg" | "jpg":
-                return print("image/jpeg")
-            case "gif":
-                return print("image/gif")
-            case "png":
-                return print("image/png")
-            case "pdf":
-                return print("application/pdf")
-            case "txt":
-                return print("text/plain")
-            case "zip":
+        if ext.endswith(("jpeg", "jpg")):
+                print("image/jpeg")
+        elif ext.endswith("gif"):
+                print("image/gif")
+        elif ext.endswith("png"):
+                print("image/png")
+        elif ext.endswith("pdf"):
+                print("application/pdf")
+        elif ext.endswith("txt"):
+                print("text/plain")
+        elif ext.endswith("zip"):
                 operatingSystem = str(input("What's your OS? ")).strip().lower()
-                return print("application/x-zip-compressed") if operatingSystem == "windows" or operatingSystem == "win" else print("application/zip")
-            case _:
-                return print("Unknown")
+                print("application/x-zip-compressed") if operatingSystem == "windows" or operatingSystem == "win" else print("application/zip")
+        else:
+                print("application/octet-stream")
             
-    mediaType(extension)
+    mediaType(file)
 
 main()
             

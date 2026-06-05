@@ -5,15 +5,15 @@ def main():
 
     match y:
         case "+":
-            print(int(x)+int(z))
+            print(f"{int(x)+int(z):.f1}")
         case "-":
-            print(int(x)-int(z))
+            print(f"{int(x)-int(z):.f1}")
         case "/":
-            print(int(x)/int(z))
+            print(f"{int(x)/int(z):.f1}")
         case "*":
-            print(int(x)*int(z))
+            print(f"{int(x)*int(z):.f1}")
         case "%":
-            print(int(x)%int(z))
+            print(f"{int(x)%int(z):.f1}")
         case _:
             print("Unknown operation")
     
