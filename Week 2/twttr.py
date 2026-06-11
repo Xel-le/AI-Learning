@@ -5,7 +5,7 @@ def main():
     for c in range(len(characters)):
         if not is_vowel(characters[c]):
             output += characters[c]
-    print(f"Input: {output}")
+    print(f"Output: {output}")
 
 def is_vowel(letter):
     if letter.lower() in "aeiou":
