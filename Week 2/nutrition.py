@@ -1,7 +1,8 @@
 def main():
     item = input("Item: ").lower().strip()
     calories = match_fruit(item)
-    print(f"Calories: {calories}")
+    if calories > 0:
+        print(f"Calories: {calories}")
 
 def match_fruit(fruit):
     match fruit:
@@ -43,5 +44,6 @@ def match_fruit(fruit):
             return 50
         case "watermelon":
             return 80
-    
+        case _:
+            return 0
 main()
