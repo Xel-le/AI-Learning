@@ -12,6 +12,8 @@ def match_fruit(fruit):
             return 50
         case "banana":
             return 110
+        case "kiwifruit":
+            return 90
         case "cantaloupe":
             return 50
         case "grapefruit":
@@ -36,7 +38,7 @@ def match_fruit(fruit):
             return 50
         case "plums":
             return 70
-        case "straberries":
+        case "strawberries":
             return 50
         case "sweet cherries":
             return 100
