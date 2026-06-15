@@ -28,12 +28,11 @@ def main():
                 except ValueError:
                     pass
                 else:
-                    if int(day) > 31 or int(month) > 12:
+                    if not (1 <= int(day) <= 31) or not (1 <= int(month) <= 12):
                          pass
                     else:
-                        print(f"{year}-{month}-{day}")
+                        print(f"{year}-{month:02}-{day:02}")
                         break
-                    break
             elif any(months in initial_date for months in months_list):
                 try:
                     month, day, year = initial_date.split(" ")
@@ -42,11 +41,14 @@ def main():
                 except ValueError:
                     pass
                 else:
-                    if int(day) > 31:
+                    if not (1 <= int(day) <= 31):
                         pass
                     else:
-                        print(f"{year}-{months_list.index(month)}-{day}")
-                        break
-                    break
+                        try:
+                            print(f"{year}-{months_list.index(month) + 1:02}-{day:02}")
+                        except ValueError:
+                            pass
+                        else:
+                            break
 
 main()
