@@ -15,19 +15,24 @@ def main():
             sys.exit("Provided argument is not a number")
         else:
             bitcoin_value = make_request()
-            total = round(float(amount*bitcoin_value), 4)
-            print(f"{total:,}") 
+            total = amount*bitcoin_value
+            print(f"{total:,.4f}") 
 
 def make_request():
     try:
         response = requests.get("https://rest.coincap.io/v3/assets/bitcoin", {"apiKey": api_key})
-        response.raise_for_status()
     except requests.RequestException:
-        print(f"Request failed. Response code: {response.status_code}")
+        print("Request failed.")
         sys.exit()
     else:
-        response = response.json()["data"]["priceUsd"]
-        return float(response)
+        try:
+            response.raise_for_status()
+        except requests.RequestException:
+            print(f"Request failed. Response code: {response.status_code}")
+            sys.exit()
+        else:
+            response = response.json()["data"]["priceUsd"]
+            return float(response)
 
 if __name__ == "__main__":
     main()
