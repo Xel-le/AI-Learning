@@ -10,18 +10,9 @@ def main():
 def shorten(t):
     result = ""
     for c in t:
-        if not isVowel(c.lower()):
+        if not c.lower() in "aeiou":
             result += c
-    if len(result) == 0:
-        sys.exit("All characters were filtered out")
-    else:
-        return result
-
-def isVowel(c):
-    if c in "aeiouy":
-        return True
-    else:
-        return False
+    return result
 
 if __name__ == "__main__":
     main()
