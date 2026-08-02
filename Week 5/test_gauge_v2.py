@@ -12,7 +12,7 @@ def test_convert_not_string():
 
 def test_convert_x_more_y():
     with pytest.raises(ValueError):
-        convert(6/1)
+        convert("6/1")
 
 def test_convert_ok():
     assert convert("1/6") == 17
