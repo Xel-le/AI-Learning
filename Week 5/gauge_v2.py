@@ -7,7 +7,7 @@ def main():
             else:
                 try:
                     print(gauge(convert(initial_fraction)))
-                except ValueError, ZeroDivisionError:
+                except (ValueError, ZeroDivisionError):
                     pass
                 else:
                     break
@@ -20,8 +20,6 @@ def convert(fraction):
         raise ValueError
     else:
         if not x.isdigit() or not y.isdigit():
-            raise ValueError
-        elif int(x) < 0 or int(y) < 0:
             raise ValueError
         elif int(y) == 0:
             raise ZeroDivisionError
