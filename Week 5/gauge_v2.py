@@ -7,7 +7,7 @@ def main():
             else:
                 try:
                     print(gauge(convert(initial_fraction)))
-                except ValueError:
+                except ValueError, ZeroDivisionError:
                     pass
                 else:
                     break
@@ -21,15 +21,14 @@ def convert(fraction):
     else:
         if not x.isdigit() or not y.isdigit():
             raise ValueError
+        elif int(x) < 0 or int(y) < 0:
+            raise ValueError
+        elif int(y) == 0:
+            raise ZeroDivisionError
         elif int(x) > int(y):
             raise ValueError
         else:
-            try:
-                result = round(int(x) / int(y) * int(100))
-            except ZeroDivisionError:
-                raise ValueError
-            else:
-                return result
+            return round(int(x) / int(y) * int(100))
 
 
 def gauge(percentage):
