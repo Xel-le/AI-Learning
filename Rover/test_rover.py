@@ -12,6 +12,8 @@ def test_boundaries():
     assert directions("bbbbbbbbbbbbbbbbbbbb", [0, 0], 0) == ([0, -10], 0)
     assert directions("lbbbbbbbbbbbbbbbbbbbb", [0, 0], 0) == ([10, 0], 3)
     assert directions("lffffffffffffffffffff", [0, 0], 0) == ([-10, 0], 3)
+    assert directions("rbbbbbbbbbbbbbbbbbbbb", [0, 0], 0) == ([-10, 0], 1)
+    assert directions("rffffffffffffffffffff", [0, 0], 0) == ([10, 0], 1)
 
 def test_continuity_and_mixed_commands():
     testing_position = [0, 0]

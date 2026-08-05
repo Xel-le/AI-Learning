@@ -38,16 +38,19 @@ def directions(commands_list, coordinates, direct):
             elif cmnd == "r":
                 direction_temp = (direction_temp+1)%4
             elif cmnd == "f":
-                if coordinates_temp[0] + movement_vectors[direction_temp][0] < 11 and coordinates_temp[0] + movement_vectors[direction_temp][0] > -11:
+                if in_bounds(coordinates_temp[0] + movement_vectors[direction_temp][0]):
                     coordinates_temp[0] += movement_vectors[direction_temp][0]
-                if coordinates_temp[1] + movement_vectors[direction_temp][1] < 11 and coordinates_temp[1] + movement_vectors[direction_temp][1] > -11:
+                if in_bounds(coordinates_temp[1] + movement_vectors[direction_temp][1]):
                     coordinates_temp[1] += movement_vectors[direction_temp][1]
             elif cmnd == "b":
-                if coordinates_temp[0] - movement_vectors[direction_temp][0] < 11 and coordinates_temp[1] - movement_vectors[direction_temp][1] > -11:
+                if in_bounds(coordinates_temp[0] - movement_vectors[direction_temp][0]):
                     coordinates_temp[0] -= movement_vectors[direction_temp][0]
-                if coordinates_temp[1] - movement_vectors[direction_temp][1] < 11 and coordinates_temp[1] - movement_vectors[direction_temp][1] > -11:
+                if in_bounds(coordinates_temp[1] - movement_vectors[direction_temp][1]):
                     coordinates_temp[1] -= movement_vectors[direction_temp][1]
     return(coordinates_temp, direction_temp)
+
+def in_bounds(coordinates):
+    return -11 < coordinates < 11
 
 if __name__ == "__main__":
     main()
