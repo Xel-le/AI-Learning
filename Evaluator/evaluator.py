@@ -43,27 +43,26 @@ def calculate(calc):
                         n = 1
                 else:
                     priority_counter += 1
-                    priority_sequences[f"lambda{priority_counter}"] = temp_calc[priority_position-1:priority_position+(2*priority_length)]
+                    priority_sequences[f"substitute{priority_counter}"] = temp_calc[priority_position-1:priority_position+(2*priority_length)]
                     if priority_total*2+1 != len(temp_calc):
                         for index in range(priority_position-1, priority_position+(2*priority_length)):
-                            temp_calc[index] = f"lambda{priority_counter}"
+                            temp_calc[index] = f"substitute{priority_counter}"
                     else:
                         for index in range(len(temp_calc)):
-                            temp_calc[index] = f"lambda{priority_counter}"
+                            temp_calc[index] = f"substitute{priority_counter}"
                     priority_length = 0
                     n = 1
 
     normal_sequences = []
     for index in range(len(temp_calc)):
-        if "lambda" not in temp_calc[index]:
+        if "substitute" not in temp_calc[index]:
             normal_sequences.append(temp_calc[index])
-        elif "lambda" in temp_calc[index]:
+        elif "substitute" in temp_calc[index]:
             if temp_calc[index] not in normal_sequences:
                 normal_sequences.append(temp_calc[index])
 
-
     for i in range(len(priority_sequences)):
-        priority_sequences[f"lambda{i}"] = float(eval("".join(priority_sequences[f"lambda{i}"])))
+        priority_sequences[f"substitute{i}"] = float(eval("".join(priority_sequences[f"substitute{i}"])))
 
     for key in priority_sequences:
         if key in normal_sequences:
