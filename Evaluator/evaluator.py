@@ -25,8 +25,18 @@ def calculate(calc):
 
     #Edge-case handling where all ops are priority
     if priority_total*2+1 == len(temp_calc):
-        result = float(eval("".join(temp_calc)))
-        return result
+        while "/" in temp_calc or "*" in temp_calc:
+            for pos in range(len(temp_calc)):
+                if temp_calc[pos] == "/":
+                    temp_calc[pos-1]=f"{float(temp_calc[pos-1])/float(temp_calc[pos+1])}"
+                    del temp_calc[pos:pos+2]
+                    break
+                elif temp_calc[pos] == "*":
+                    temp_calc[pos-1]=f"{float(temp_calc[pos-1])*float(temp_calc[pos+1])}"
+                    del temp_calc[pos:pos+2]
+                    break
+
+        return float(temp_calc[0])
     
 
     #Derermining priority sequences
@@ -43,7 +53,7 @@ def calculate(calc):
                         n = 1
                 else:
                     priority_counter += 1
-                    priority_sequences[f"substitute{priority_counter}"] = temp_calc[priority_position-1:priority_position+(2*priority_length)]
+                    priority_sequences[f"{priority_counter}"] = temp_calc[priority_position-1:priority_position+(2*priority_length)]
                     if priority_total*2+1 != len(temp_calc):
                         for index in range(priority_position-1, priority_position+(2*priority_length)):
                             temp_calc[index] = f"substitute{priority_counter}"
@@ -61,17 +71,36 @@ def calculate(calc):
             if temp_calc[index] not in normal_sequences:
                 normal_sequences.append(temp_calc[index])
 
-    for i in range(len(priority_sequences)):
-        priority_sequences[f"substitute{i}"] = float(eval("".join(priority_sequences[f"substitute{i}"])))
+    for k in range(len(priority_sequences)):
+        while "/" in priority_sequences[f"{k}"] or "*" in priority_sequences[f"{k}"]:
+            for pos in range(len(priority_sequences[f"{k}"])):
+                if priority_sequences[f"{k}"][pos] == "/":
+                    priority_sequences[f"{k}"][pos-1]=f"{float(priority_sequences[f"{k}"][pos-1])/float(priority_sequences[f"{k}"][pos+1])}"
+                    del priority_sequences[f"{k}"][pos:pos+2]
+                    break
+                elif priority_sequences[f"{k}"][pos] == "*":
+                    priority_sequences[f"{k}"][pos-1]=f"{float(priority_sequences[f"{k}"][pos-1])*float(priority_sequences[f"{k}"][pos+1])}"
+                    del priority_sequences[f"{k}"][pos:pos+2]
+                    break
+
+        #priority_sequences[f"substitute{i}"] = float(eval("".join(priority_sequences[f"substitute{i}"])))
 
     for key in priority_sequences:
-        if key in normal_sequences:
-            normal_sequences[normal_sequences.index(key)] = str(priority_sequences[key])
+        if f"substitute{key}" in normal_sequences:
+            normal_sequences[normal_sequences.index(f"substitute{key}")] = "".join(priority_sequences[key])
 
-    result = float(eval("".join(normal_sequences)))
+    while "+" in normal_sequences or "-" in normal_sequences:
+                for pos in range(len(normal_sequences)):
+                    if normal_sequences[pos] == "-":
+                        normal_sequences[pos-1]=f"{float(normal_sequences[pos-1])-float(normal_sequences[pos+1])}"
+                        del normal_sequences[pos:pos+2]
+                        break
+                    elif normal_sequences[pos] == "+":
+                        normal_sequences[pos-1]=f"{float(normal_sequences[pos-1])+float(normal_sequences[pos+1])}"
+                        del normal_sequences[pos:pos+2]
+                        break
 
-    return result
-
+    return float(normal_sequences[0])
 
 if __name__ == "__main__":
     main()
