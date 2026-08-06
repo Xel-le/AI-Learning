@@ -9,16 +9,26 @@ def main():
         print(calculate(calculation))
     
 
-#10 + 12 - 2 * 5 + 15 / 5 * 7 / 3 + 19
+#10 + 12 - -2 * 5 + 15 / 5 * 7 / 3 + 19
 
 def calculate(calc):
     calc = calc.split()
-    apply_priority(calc)
-    apply_standard(calc)
+    #calc = normalize(calc)
+    apply(calc)
     return float(calc[0])
 
+#def normalize(calc_list):
+#    temp_calc = list(calc_list)
+#   normalized_calc = []
+#    for i in range(len(temp_calc)):
+#        if temp_calc[i] in ["a", "b", "c", "d"]:
+#            if temp_calc[i-1] == " ":
+#
+#        else:
+#           normalized_calc.append(temp_calc[i])
+#    print(normalized_calc)
 
-def apply_priority(calc_list):
+def apply(calc_list):
     while "/" in calc_list or "*" in calc_list:
         for pos in range(len(calc_list)):
             if calc_list[pos] == "/":
@@ -30,8 +40,6 @@ def apply_priority(calc_list):
                 del calc_list[pos:pos+2]
                 break
 
-
-def apply_standard(calc_list):
     while "+" in calc_list or "-" in calc_list:
             for pos in range(len(calc_list)):
                 if calc_list[pos] == "-":
