@@ -13,44 +13,34 @@ def main():
 
 def calculate(calc):
     calc = calc.split()
-    #calc = normalize(calc)
     apply(calc)
     return float(calc[0])
-
-#def normalize(calc_list):
-#    temp_calc = list(calc_list)
-#   normalized_calc = []
-#    for i in range(len(temp_calc)):
-#        if temp_calc[i] in ["a", "b", "c", "d"]:
-#            if temp_calc[i-1] == " ":
-#
-#        else:
-#           normalized_calc.append(temp_calc[i])
-#    print(normalized_calc)
 
 def apply(calc_list):
     while "/" in calc_list or "*" in calc_list:
         for pos in range(len(calc_list)):
-            if calc_list[pos] == "/":
-                calc_list[pos-1]=f"{float(calc_list[pos-1])/float(calc_list[pos+1])}"
-                del calc_list[pos:pos+2]
-                break
-            elif calc_list[pos] == "*":
-                calc_list[pos-1]=f"{float(calc_list[pos-1])*float(calc_list[pos+1])}"
+            if calc_list[pos] == "/" or calc_list[pos] == "*":
+                calc_list[pos-1]=f"{do_calc(float(calc_list[pos-1]), calc_list[pos], float(calc_list[pos+1]))}"
                 del calc_list[pos:pos+2]
                 break
 
     while "+" in calc_list or "-" in calc_list:
             for pos in range(len(calc_list)):
-                if calc_list[pos] == "-":
-                    calc_list[pos-1]=f"{float(calc_list[pos-1])-float(calc_list[pos+1])}"
-                    del calc_list[pos:pos+2]
-                    break
-                elif calc_list[pos] == "+":
-                    calc_list[pos-1]=f"{float(calc_list[pos-1])+float(calc_list[pos+1])}"
+                if calc_list[pos] == "-" or calc_list[pos] == "+":
+                    calc_list[pos-1]=f"{do_calc(float(calc_list[pos-1]), calc_list[pos], float(calc_list[pos+1]))}"
                     del calc_list[pos:pos+2]
                     break
 
+def do_calc(a, op, b):
+    if op == "+":
+        return a+b
+    if op == "-":
+        return a-b
+    if op == "/":
+        return a/b
+    if op == "*":
+        return a*b
+    
 
 if __name__ == "__main__":
     main()

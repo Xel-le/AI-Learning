@@ -23,3 +23,9 @@ def test_associativity():
     assert calculate("10 - 5 + 3") == 8.0       
     assert calculate("2 - 3 + 4 - 5") == -2.0     
     assert calculate("100 / 10 / 2 * 5") == 25.0
+
+def test_negatives():
+    assert calculate("-5 + 3") ==  -2.0
+    assert calculate("3 + -2") ==  1.0
+    assert calculate("10 - -5") == 15.0
+    assert calculate("-5 * -2") == 10.0
